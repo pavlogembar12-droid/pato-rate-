@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfaf5" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!--
+      These are SITE-WIDE FALLBACK tags. On every real page, scripts/prerender.mjs
+      overwrites this <head> after the build with the page-specific title/description
+      that <Seo /> renders at runtime — so Google, Telegram, Facebook, etc. get
+      correct per-page tags without needing to execute JavaScript.
+      Keep this fallback in sync with src/seo.config.ts in case prerender ever
+      fails for a route or a new route is added without updating the script.
+    -->
+    <title>PatoRate — відгуки, Google Карти та лендінги для локального бізнесу</title>
+    <meta
+      name="description"
+      content="PatoRate — послуги для зростання бізнесу: підвищення відгуків, супровід Google Карт, ведення бізнесу та створення лендінгів."
+    />
+    <meta property="og:site_name" content="PatoRate" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="PatoRate — відгуки, Google Карти та лендінги для локального бізнесу"
+    />
+    <meta
+      property="og:description"
+      content="PatoRate — послуги для зростання бізнесу: підвищення відгуків, супровід Google Карт, ведення бізнесу та створення лендінгів."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="PatoRate — відгуки, Google Карти та лендінги для локального бізнесу"
+    />
+    <meta
+      name="twitter:description"
+      content="PatoRate — послуги для зростання бізнесу: підвищення відгуків, супровід Google Карт, ведення бізнесу та створення лендінгів."
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>

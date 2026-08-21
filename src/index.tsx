@@ -1,0 +1,35 @@
+import { StrictMode, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Toaster } from 'react-hot-toast';
+import { RouterProvider } from 'react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { router } from './router';
+import './index.css';
+import LoadingSpinner from './components/LoadingSpinner';
+import { Seo } from './components/Seo';
+import { TooltipProvider } from './components/ui/Tooltip';
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <TooltipProvider delay={150}>
+      <Suspense fallback={<LoadingSpinner fullScreen />}>
+        {/* Site-wide SEO defaults; pages can override via <Page seo={{...}}> */}
+        <Seo />
+        <Toaster position="top-right" />
+        <RouterProvider router={router} />
+      </Suspense>
+    </TooltipProvider>
+  );
+}
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </StrictMode>
+);
+
