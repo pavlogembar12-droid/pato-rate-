@@ -1,0 +1,34 @@
+{
+  "name": "patorate",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/prerender.mjs || echo 'Prerender skipped/failed — falling back to static tags in index.html. See scripts/prerender.mjs.'",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.5.0",
+    "@tanstack/react-query": "^5.90.21",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.575.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hot-toast": "^2.6.0",
+    "react-router": "^8.3.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/node": "^20.11.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "puppeteer": "^24.0.0",
+    "serve-handler": "^6.1.5",
+    "tailwindcss": "^4.1.14",
+    "typescript": "^5.3.3",
+    "vite": "^7.0.0"
+  }
+}
