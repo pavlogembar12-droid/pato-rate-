@@ -18,7 +18,8 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from '@sparticuz/chromium';
 import handler from 'serve-handler';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -47,8 +48,9 @@ async function main() {
   console.log(`Prerender server running at http://localhost:${PORT}`);
 
   const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: chromium.args,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless
   });
 
   try {
@@ -58,8 +60,6 @@ async function main() {
 
       await page.goto(target, { waitUntil: 'networkidle0', timeout: 30_000 });
 
-      // <Seo /> renders synchronously on mount via React 19's native
-      // head-hoisting, but give one extra frame in case of Suspense.
       await page.waitForSelector('title');
       await new Promise((r) => setTimeout(r, 150));
 
