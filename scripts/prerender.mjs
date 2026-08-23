@@ -43,7 +43,14 @@ async function main() {
     process.exit(1);
   }
 
-  const server = createServer((req, res) => handler(req, res, { public: distDir }));
+  // The crawl below requests clean URLs like /services/vidhuky. Those don't
+  // exist as real files in dist/ yet (writing them is this script's job),
+  // so without a rewrite the local static server 404s and waitForSelector
+  // hangs waiting for a <title> that will never appear. Mirror vercel.json's
+  // SPA fallback locally so every route resolves to index.html, same as prod.
+  const rewrites = routes.map((route) => ({ source: route.url, destination: '/index.html' }));
+
+  const server = createServer((req, res) => handler(req, res, { public: distDir, rewrites }));
   await new Promise((resolve) => server.listen(PORT, resolve));
   console.log(`Prerender server running at http://localhost:${PORT}`);
 
