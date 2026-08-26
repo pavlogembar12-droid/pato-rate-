@@ -30,17 +30,15 @@ export function Seo({ title, description, image, noindex }: SeoProps) {
   const finalDescription = description ?? seoConfig.description;
   const finalImage = image ?? DEFAULT_OG_IMAGE;
 
-  // Canonical URL without query string / hash, so paginated or tracked visits
-  // do not register as separate pages.
-  const origin = typeof window === 'undefined' ? undefined : window.location.origin;
-  const canonicalUrl = origin ? `${origin}${window.location.pathname}` : undefined;
-  // OG/Twitter image tags need an absolute URL to work reliably across
-  // link-preview bots (Telegram, Facebook, etc).
-  const absoluteImageUrl = origin
-    ? finalImage.startsWith('http')
-      ? finalImage
-      : `${origin}${finalImage}`
-    : finalImage;
+  // Canonical/og:url/og:image must always resolve against the real
+  // production domain (seoConfig.siteUrl), never window.location.origin —
+  // during prerendering that origin is a local build-time server, not the
+  // public site. Only the *path* (not the host) comes from window.location.
+  const path = typeof window === 'undefined' ? '' : window.location.pathname;
+  const canonicalUrl = `${seoConfig.siteUrl}${path}`;
+  const absoluteImageUrl = finalImage.startsWith('http')
+    ? finalImage
+    : `${seoConfig.siteUrl}${finalImage}`;
 
   return (
     <>
@@ -48,8 +46,8 @@ export function Seo({ title, description, image, noindex }: SeoProps) {
       {finalDescription && (
         <meta name="description" content={finalDescription} />
       )}
-      {canonicalUrl && !noindex && <link rel="canonical" href={canonicalUrl} />}
-      {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+      {!noindex && <link rel="canonical" href={canonicalUrl} />}
+      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:site_name" content={seoConfig.siteName} />
       <meta property="og:locale" content="uk_UA" />
       <meta property="og:title" content={finalTitle} />
