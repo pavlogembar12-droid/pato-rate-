@@ -73,9 +73,9 @@ export default function HomePage() {
   return (
     <Page
       seo={{
-        title: 'Відгуки, Google Карти та лендінги для локального бізнесу',
+        title: 'Відгуки, Google Карти та лендінги для бізнесу по всій Україні',
         description:
-          'PatoRate: підвищення відгуків, супровід Google Карт, ведення бізнесу та створення лендінгів. Прозорий план робіт і метрики до/після.',
+          'PatoRate: підвищення відгуків Google , супровід Google Карт, ведення бізнесу та  Дистанційно по всій Україні і метрики до/після.',
       }}
     >
       <StructuredData data={organizationSchema} />
