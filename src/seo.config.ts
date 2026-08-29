@@ -47,7 +47,7 @@ const siteName = 'PatoRate';
 const siteUrl = 'https://pato-rate.vercel.app';
 
 const description =
-  'PatoRate — послуги для зростання бізнесу: підвищення відгуків, ведення бізнесу, супровід Google Карт та створення лендінгів.';
+  'PatoRate — послуги для зростання бізнесу по всій Україні: підвищення відгуків, ведення бізнесу, супровід Google Карт та створення лендінгів.';
 
 export const seoConfig: SeoConfig = {
   siteName,
